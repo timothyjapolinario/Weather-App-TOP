@@ -17,7 +17,7 @@ const getWeather = async function dataFetcherFromWeatherAPI(location) {
       })
       .then((data) => {
         console.log(data);
-        const timeZone = getTimeZone("ZA", data.name);
+        const timeZone = getTimeZone(data.sys.country, data.name);
         const time = getCurrentTimeFromUTC(timeZone);
         data.time = time;
         const weather = mapRawToWeatherObject(data);
