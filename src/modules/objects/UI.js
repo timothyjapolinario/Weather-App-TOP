@@ -1,5 +1,6 @@
 import { getWeather } from "../util/DataFetcher";
-const searchBar = document.querySelector("#search-box");
+const searchForm = document.querySelector(".search-box-form");
+const searchBox = document.querySelector("#search-box");
 const searchButton = document.querySelector("#search-button");
 const weatherType = document.querySelector(".weather-name");
 const weatherLocation = document.querySelector(".weather-location");
@@ -8,11 +9,24 @@ const weatherWind = document.querySelector(".weather-wind");
 const weatherTime = document.querySelector(".weather-time");
 const body = document.querySelector("body");
 const initEvents = function initializeAllEvents() {
-  searchButton.addEventListener("click", fetchWeather);
+  fetchWeather("Manila");
+
+  searchForm.addEventListener("submit", (e) => {
+    console.log("PUTANGNA");
+    const location = searchBox.value;
+    e.preventDefault();
+
+    fetchWeather(location);
+  });
+
+  searchButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    const location = searchBox.value;
+    fetchWeather(location);
+  });
 };
 
-const fetchWeather = async function fetchWeatherInformation() {
-  const location = searchBar.value;
+const fetchWeather = async function fetchWeatherInformation(location) {
   let weather = null;
   if (location != "") {
     try {
@@ -26,13 +40,19 @@ const fetchWeather = async function fetchWeatherInformation() {
 };
 const updateUI = function updateUI(weather) {
   console.log(weather);
+  const hour = parseInt(weather.time.slice(0, 2));
+
   weatherType.innerText = weather.description;
   weatherLocation.innerText = weather.location;
   weatherTemperature.innerText = weather.temperature;
-  weatherWind.innerText = weather.wind;
-  weatherTime.innerText = weather.time;
+  weatherWind.innerText = "Wind Speed: " + weather.wind;
+  if (hour < 10) {
+    weatherTime.innerText = "0" + weather.time;
+  } else {
+    weatherTime.innerText = weather.time;
+  }
 
-  updateBackground(parseInt(weather.time.slice(0, 2)));
+  updateBackground(hour);
 };
 
 const updateBackground = function updateBackground(hour) {
