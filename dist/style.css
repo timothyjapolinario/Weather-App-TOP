@@ -7,3 +7,15 @@ body {
   background-size: 100% 100%;
   color: white;
 }
+.weather-info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.weather-location {
+  font-size: 10rem;
+}
+
+.weather-info > div > * {
+  background-color: rgba(71, 71, 71, 0.801);
+}
