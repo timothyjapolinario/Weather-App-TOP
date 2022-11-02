@@ -11,11 +11,65 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
-
+.weather-info-one {
+  display: grid;
+  grid-template-rows: 8fr 2fr;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+.weather-info-two {
+  display: grid;
+  justify-items: center;
+  grid-template-columns: 1fr 1.5fr;
+}
+.weather-name {
+  display: flex;
+  gap: 20px;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  font-size: 3rem;
+}
+.weather-icon {
+  width: 70px;
+  height: 70px;
+}
+.weather-temperature {
+  font-size: 40px;
+}
+.weather-wind {
+  font-size: 40px;
+}
 .weather-location {
   font-size: 10rem;
+  grid-column-start: 1;
+  grid-column-end: 4;
+  text-align: center;
 }
-
-.weather-info > div > * {
+.weather-time {
+  font-size: 2rem;
+}
+.search-box-form {
+  gap: 10px;
+  width: 100%;
+  display: flex;
+  grid-column-start: 2;
+  grid-column-end: 4;
+}
+#search-box {
+  width: 70%;
+}
+#search-button {
+  font-weight: bolder;
+  border: 2px solid white;
+  border-radius: 10px;
+  padding: 5px;
+}
+.weather-time {
+  grid-column-start: 1;
+  text-align: center;
+}
+.weather-info > div {
+  border-radius: 10px;
+  margin: 20px;
+  padding: 10px;
   background-color: rgba(71, 71, 71, 0.801);
 }

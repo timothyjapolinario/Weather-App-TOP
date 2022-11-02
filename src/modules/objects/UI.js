@@ -2,15 +2,16 @@ import { getWeather } from "../util/DataFetcher";
 const searchForm = document.querySelector(".search-box-form");
 const searchBox = document.querySelector("#search-box");
 const searchButton = document.querySelector("#search-button");
-const weatherType = document.querySelector(".weather-name");
+const weatherName = document.querySelector(".weather-name");
 const weatherLocation = document.querySelector(".weather-location");
 const weatherTemperature = document.querySelector(".weather-temperature");
 const weatherWind = document.querySelector(".weather-wind");
 const weatherTime = document.querySelector(".weather-time");
+const weatherIcon = document.querySelector(".weather-icon");
 const body = document.querySelector("body");
+
 const initEvents = function initializeAllEvents() {
   fetchWeather("Manila");
-
   searchForm.addEventListener("submit", (e) => {
     console.log("PUTANGNA");
     const location = searchBox.value;
@@ -41,8 +42,8 @@ const fetchWeather = async function fetchWeatherInformation(location) {
 const updateUI = function updateUI(weather) {
   console.log(weather);
   const hour = parseInt(weather.time.slice(0, 2));
-
-  weatherType.innerText = weather.description;
+  weatherName.querySelector(".weather-name-text").innerText =
+    capitalizeEveryWord(weather.description);
   weatherLocation.innerText = weather.location;
   weatherTemperature.innerText = weather.temperature;
   weatherWind.innerText = "Wind Speed: " + weather.wind;
@@ -51,7 +52,9 @@ const updateUI = function updateUI(weather) {
   } else {
     weatherTime.innerText = weather.time;
   }
+  //"./images/weather-icons/01d.png"
 
+  weatherIcon.src = `./images/weather-icons/${weather.imageIcon}.png`;
   updateBackground(hour);
 };
 
@@ -73,6 +76,15 @@ const updateBackground = function updateBackground(hour) {
     body.style.backgroundImage = 'url("./images/background/afternoon-bg.jpg")';
     return;
   }
+};
+const capitalizeEveryWord = function capitalizeEveryWord(word) {
+  const wordList = word.split(" ");
+  const capitalized = wordList
+    .map((word) => {
+      return word[0].toUpperCase() + word.substring(1);
+    })
+    .join(" ");
+  return capitalized;
 };
 
 export { initEvents };
